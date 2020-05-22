@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { View, StyleSheet, FlatList, Image, Text, ViewStyle, TextStyle } from "react-native";
 import TouchableWrapper from './TouchableWrapper';
-import { prediction } from '../types';
+import { prediction } from './types';
 
 // prediction text presentation
 export type decorateTextFormat = 'matched' | 'unmatched';

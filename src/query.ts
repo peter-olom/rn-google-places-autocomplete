@@ -1,4 +1,4 @@
-import { GoogleAutoCompleteResult, GoogleParameters } from '../types';
+import { GoogleAutoCompleteResult, GoogleParameters } from './types';
 
 export default async function queryAddr(
   query: string, 

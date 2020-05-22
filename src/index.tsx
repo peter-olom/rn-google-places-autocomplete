@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import { View, TextInput, StyleSheet, ViewStyle, TextStyle, ActivityIndicator } from 'react-native';
 import 'react-native-get-random-values';
 import * as Random from 'expo-random';
@@ -6,7 +6,7 @@ import { nanoid as bareNanoid } from 'nanoid'
 import { nanoid as expoNanoid } from 'nanoid/async/index'
 import queryAddr from './query';
 import Places, { suggestionsStyle, decorateTextFormat } from './places';
-import { GoogleAutoCompleteResult, prediction, GoogleParameters } from '../types';
+import { GoogleAutoCompleteResult, prediction, GoogleParameters } from './types';
 
 export interface AutoComplete {
   platformType: 'bare' | 'expo';
@@ -42,14 +42,14 @@ function AutoComplete({
   onQueryError,
 }: AutoComplete) 
 {
-  const [addr, setAddr] = useState<string>("");
-  const [places, setPlaces] = useState<Array<prediction>>([]);
-  const [sessionToken, setSessionToken] = useState('');
-  const [fetching, setFetching] = useState<boolean>(false);
+  const [addr, setAddr] = React.useState<string>("");
+  const [places, setPlaces] = React.useState<Array<prediction>>([]);
+  const [sessionToken, setSessionToken] = React.useState('');
+  const [fetching, setFetching] = React.useState<boolean>(false);
 
   const offset = fetchOffset || 3;
   
-  useEffect(() => {
+  React.useEffect(() => {
     if(value != undefined && value != "") {
       setAddr(value);
     }
@@ -170,4 +170,4 @@ const styles = StyleSheet.create({
     right: 10,
     top: 16
   }
-})
+});
