@@ -1,0 +1,32 @@
+{
+  "name": "rn-google-places-autocomplete",
+  "version": "1.0.0",
+  "description": "Easy to use Google places autocomplete with in-built support for sessionTokens",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "prepare": "tsc"
+  },
+  "keywords": [
+    "react-native",
+    "google",
+    "places",
+    "autocomplete",
+    "session",
+    "token",
+    "easy"
+  ],
+  "author": "Peter Olom",
+  "homepage": "https://github.com/peter-olom/rn-google-places-autocomplete",
+  "repository": "https://github.com/peter-olom/rn-google-places-autocomplete",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react-native": "^0.62.10",
+    "react-native": "^0.62.2"
+  },
+  "dependencies": {
+    "expo-random": "^8.1.0",
+    "nanoid": "^3.1.9",
+    "react-native-get-random-values": "^1.4.0"
+  }
+}
