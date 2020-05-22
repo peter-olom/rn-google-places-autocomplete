@@ -21,12 +21,13 @@
   "repository": "https://github.com/peter-olom/rn-google-places-autocomplete",
   "license": "MIT",
   "devDependencies": {
-    "@types/react-native": "^0.62.10",
-    "react-native": "^0.62.2"
+    "@types/react-native": "^0.62.10"
   },
   "dependencies": {
     "expo-random": "^8.1.0",
     "nanoid": "^3.1.9",
+    "react": "^16.13.1",
+    "react-native": "^0.62.2",
     "react-native-get-random-values": "^1.4.0"
   }
 }

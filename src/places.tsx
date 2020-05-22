@@ -82,7 +82,7 @@ export default function Places({ data, setValue, suggestionsStyle, icon, highlig
         }
         ListFooterComponent={
           data.length > 0 ?
-            <Image source={require('../assets/powered_by_google.png')} resizeMode='contain' style={{ width: '32%', alignSelf: 'flex-end', marginRight: 10 }} />
+            <Image source={require('../../assets/powered_by_google.png')} resizeMode='contain' style={{ width: '32%', alignSelf: 'flex-end', marginRight: 10 }} />
             :<></>
         }
       />
