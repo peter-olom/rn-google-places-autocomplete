@@ -1,6 +1,6 @@
 {
   "name": "rn-google-places-autocomplete",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Easy to use Google places autocomplete with in-built support for sessionTokens",
   "main": "dist/index.jsx",
   "types": "dist/index.d.ts",
