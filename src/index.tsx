@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { View, TextInput, StyleSheet, ViewStyle, TextStyle, ActivityIndicator } from 'react-native';
-import 'react-native-get-random-values';
-import * as Random from 'expo-random';
 import { nanoid as bareNanoid } from 'nanoid'
 import { nanoid as expoNanoid } from 'nanoid/async/index'
 import queryAddr from './query';
@@ -9,7 +7,7 @@ import Places, { suggestionsStyle, decorateTextFormat } from './places';
 import { GoogleAutocompleteResult, prediction, GoogleParameters } from './types';
 
 export interface PlacesAutocompleteProps {
-  platformType: 'bare' | 'expo';
+  sessionSupport?: 'bare' | 'expo';
   placeholder?: string;
   value?: string;
   autocompleteContainer?: ViewStyle;
@@ -29,7 +27,7 @@ export interface PlacesAutocompleteProps {
 }
 
 function PlacesAutocomplete({
-  platformType,
+  sessionSupport,
   placeholder,
   value,
   autocompleteContainer,
@@ -46,7 +44,7 @@ function PlacesAutocomplete({
 {
   const [addr, setAddr] = React.useState<string>("");
   const [places, setPlaces] = React.useState<Array<prediction>>([]);
-  const [sessionToken, setSessionToken] = React.useState('');
+  const [sessionToken, setSessionToken] = React.useState<string>();
   const [fetching, setFetching] = React.useState<boolean>(false);
 
   const offset = fetchOffset || 3;
@@ -72,11 +70,13 @@ function PlacesAutocomplete({
   }
 
   const createSessionToken = async () => {
-    if (platformType == 'expo') {
+    if (sessionSupport == 'expo') {
       return await expoNanoid();
     }
     
-    return bareNanoid();
+    if (sessionSupport == 'bare') {
+      return bareNanoid();
+    }
   }
   const controller = new AbortController();
   const signal = controller.signal;
@@ -92,11 +92,14 @@ function PlacesAutocomplete({
           onFocus={async () => {
             // create session token here
             const sess = await createSessionToken();
-            setSessionToken(sess);
+            if(sess) setSessionToken(sess);
+
+            console.log(sess)
           }}
           onBlur={() => {
             // discard the session token
             setSessionToken('');
+            setPlaces([]);
           }}
           onKeyPress={(e) => {
             // more reliable for clearing predictions and halting fetch
@@ -112,9 +115,9 @@ function PlacesAutocomplete({
               try {
                 const res = await queryAddr(
                   text, 
-                  sessionToken,
                   googleParameters, 
                   signal, 
+                  sessionToken,
                   updateFetching,
                   onQueryError,
                 );

@@ -49,7 +49,15 @@ export interface PlacesProps {
 
 export default function Places({ data, setValue, suggestionsStyle, icon, highlight }: PlacesProps) {
   return (
-    <View style={[{ position: 'absolute', top: 0, right: 0, left: 0, backgroundColor: '#fff', zIndex: 9 }, suggestionsStyle?.container]}>
+    <View style={[{ 
+      position: 'absolute', 
+      top: 0, 
+      right: 0, 
+      left: 0, 
+      backgroundColor: '#fff', 
+      zIndex: data.length ?  4 : undefined,
+      elevation: data.length ? 4 : undefined
+      }, suggestionsStyle?.container]}>
       <FlatList
         keyboardShouldPersistTaps='always'
         data={data}
