@@ -12,6 +12,7 @@ export interface PlacesAutocompleteProps {
   platformType: 'bare' | 'expo';
   placeholder?: string;
   value?: string;
+  autocompleteContainer?: ViewStyle;
   inputContainerStyle?: ViewStyle;
   inputStyle?: TextStyle;
   fetchOffset?: number;
@@ -31,6 +32,7 @@ function PlacesAutocomplete({
   platformType,
   placeholder,
   value,
+  autocompleteContainer,
   inputContainerStyle,
   inputStyle,
   fetchOffset,
@@ -80,7 +82,7 @@ function PlacesAutocomplete({
   const signal = controller.signal;
 
   return (
-    <View style={styles.mainContent}>
+    <View style={[autocompleteContainer]}>
       <View style={[styles.autocompleteContainer, inputContainerStyle]}>
         <TextInput
           spellCheck={false}
@@ -151,9 +153,6 @@ export default PlacesAutocomplete;
 
 // Default stylings
 const styles = StyleSheet.create({
-  mainContent: {
-    flex: 1
-  },
   autocompleteContainer: {
     marginTop: 10,
     backgroundColor: '#fff'

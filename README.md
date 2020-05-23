@@ -84,6 +84,8 @@ const apiKey = 'YOUR_API_KEY';
 
   value: string // set initial Value
 
+  autocompleteContainer: ViewStyle // style for the container that wraps everything
+
   inputContainerStyle: ViewStyle // style the view that wraps the TextInput
 
   inputStyle: TextStyle // style the input box
@@ -113,6 +115,8 @@ const apiKey = 'YOUR_API_KEY';
 ```typescript
 
   PlacesAutocomplete {
+
+    autocompleteContainer: ViewStyle // root container
 
     inputContainerStyle: ViewStyle // input contain style
 
