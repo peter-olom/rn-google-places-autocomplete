@@ -6,9 +6,9 @@ import { nanoid as bareNanoid } from 'nanoid'
 import { nanoid as expoNanoid } from 'nanoid/async/index'
 import queryAddr from './query';
 import Places, { suggestionsStyle, decorateTextFormat } from './places';
-import { GoogleAutoCompleteResult, prediction, GoogleParameters } from './types';
+import { GoogleAutocompleteResult, prediction, GoogleParameters } from './types';
 
-export interface AutoComplete {
+export interface PlacesAutocompleteProps {
   platformType: 'bare' | 'expo';
   placeholder?: string;
   value?: string;
@@ -24,10 +24,10 @@ export interface AutoComplete {
   googleParameters: GoogleParameters
   onSelectAddress?(address: prediction): void;
   onFetching?(status: boolean): void;
-  onQueryError?(res: GoogleAutoCompleteResult): void;
+  onQueryError?(res: GoogleAutocompleteResult): void;
 }
 
-function AutoComplete({
+function PlacesAutocomplete({
   platformType,
   placeholder,
   value,
@@ -40,7 +40,7 @@ function AutoComplete({
   onSelectAddress,
   onFetching,
   onQueryError,
-}: AutoComplete) 
+}: PlacesAutocompleteProps) 
 {
   const [addr, setAddr] = React.useState<string>("");
   const [places, setPlaces] = React.useState<Array<prediction>>([]);
@@ -147,7 +147,7 @@ function AutoComplete({
   )
 }
 
-export default AutoComplete;
+export default PlacesAutocomplete;
 
 // Default stylings
 const styles = StyleSheet.create({

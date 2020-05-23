@@ -1,7 +1,7 @@
 
 # rn-google-places-autocomplete
 
-Easy to use Google places autocomplete with in-built support for sessionTokens.
+Easy to use Google Places Autocomplete with in-built support for sessionTokens.
 
 ### Screenshot
 ![](./screenshot/1.gif)
@@ -25,13 +25,13 @@ yarn add rn-google-places-autocomplete
 ### Usage
 
 ```typescript
-import AutoComplete from 'rn-google-places-autocomplete';
+import PlacesAutocomplete from 'rn-google-places-autocomplete';
 const apiKey = 'YOUR_API_KEY';
 
 // built from the ground up to be easily customized
 // includes typings for all options
 
-<AutoComplete
+<PlacesAutocomplete
   googleParameters={{
     apiKey: apiKey,
     components: ['ng']
@@ -74,7 +74,7 @@ const apiKey = 'YOUR_API_KEY';
 * Mirrors all parameter on the [google documentation here](https://developers.google.com/places/web-service/autocomplete/ "Google Places Autocomplete")
 
 
-### Complete AutoComplete Options
+### Complete PlacesAutocomplete Options
 
 ```typescript
 
@@ -112,7 +112,7 @@ const apiKey = 'YOUR_API_KEY';
 
 ```typescript
 
-  AutoComplete {
+  PlacesAutocomplete {
 
     inputContainerStyle: ViewStyle // input contain style
 
@@ -156,7 +156,7 @@ const apiKey = 'YOUR_API_KEY';
 
   // see https://developers.google.com/places/web-service/autocomplete#place_autocomplete_responses
   // for more information on the type of response that'll be populated here
-  GoogleAutoCompleteResult{
+  GoogleAutocompleteResult{
     error_message: string;
     predictions: Array<prediction>;
     status: string;

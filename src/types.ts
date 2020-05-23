@@ -28,7 +28,7 @@ export interface prediction {
   types: Array<string>
 }
 
-export interface GoogleAutoCompleteResult{
+export interface GoogleAutocompleteResult{
   error_message: string;
   predictions: Array<prediction>;
   status: string;
