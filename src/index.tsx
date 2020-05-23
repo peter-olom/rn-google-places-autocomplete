@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { View, TextInput, StyleSheet, ViewStyle, TextStyle, ActivityIndicator } from 'react-native';
+import 'react-native-get-random-values';
+import * as Random from 'expo-random';
 import { nanoid as bareNanoid } from 'nanoid'
 import { nanoid as expoNanoid } from 'nanoid/async/index'
 import queryAddr from './query';

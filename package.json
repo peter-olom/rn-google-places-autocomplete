@@ -1,6 +1,6 @@
 {
   "name": "rn-google-places-autocomplete",
-  "version": "1.1.2",
+  "version": "1.1.1",
   "description": "Easy to use Google places autocomplete with in-built support for sessionTokens",
   "main": "dist/index.jsx",
   "types": "dist/index.d.ts",
@@ -28,11 +28,11 @@
     "react-native": "^0.62.2"
   },
   "dependencies": {
-    "nanoid": "^3.1.9"
+    "expo-random": "^8.1.0",
+    "nanoid": "^3.1.9",
+    "react-native-get-random-values": "^1.4.0"
   },
   "peerDependencies": {
-    "expo-random": "^8.1.0",
-    "react-native-get-random-values": "^1.4.0",
     "react-native": ">= 0.60",
     "react": ">= 16.9.0",
     "react-dom": ">= 16.9.0"
