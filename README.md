@@ -6,7 +6,8 @@ Easy to use Google places autocomplete with in-built support for sessionTokens.
 ### Screenshot
 ![](./screenshot/1.gif)
 
-**Working expo app here**
+**[See demo app here](https://expo.io/@devrue/places-autocomplete-demo "rn-google-places-autocomplete")**
+
 
 ### Installation
 
