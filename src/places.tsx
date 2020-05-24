@@ -1,42 +1,63 @@
 import * as React from 'react';
 import { View, StyleSheet, FlatList, Image, Text, ViewStyle, TextStyle } from "react-native";
 import TouchableWrapper from './TouchableWrapper';
-import { prediction } from './types';
+import { prediction, lengthAndOffset } from './types';
+import { nanoid } from 'nanoid/non-secure'
+
 
 // prediction text presentation
 export type decorateTextFormat = 'matched' | 'unmatched';
 function decorateText(
-  text: string, 
-  subText: string, 
-  style: { main?: TextStyle, sub?: TextStyle }, 
+  text: Array<string>, 
+  matched: Array<lengthAndOffset>, 
+  style?: suggestionsStyle, 
   format?: decorateTextFormat,
   ){
-  const t = text.split(subText);
-  if(format == 'matched') {
-    return <Text style={[{ color: '#c5c5c5', fontSize: 16 }, style.main]}>
-    {t[0]}
-    <Text style={[{fontWeight: 'bold', color: '#121'}, style.sub]}>{subText}</Text>
-    {t[1]}
-  </Text>
+  let formatted:Array<JSX.Element | string> = JSON.parse(JSON.stringify(text));
+
+  if (format == 'matched') {
+    for (let index = 0; index < matched.length; index++) {
+      let { offset, length } = matched[index];
+      const match = text.slice(offset, offset + length).join('');
+      if(text.length != formatted.length) {
+        // adjust offset to match the new array length
+        offset = offset - (text.length - formatted.length);
+      }
+      formatted.splice(
+        offset, 
+        length, 
+        <Text key={nanoid()} style={[{fontWeight: 'bold', color: '#121'}, style?.highlightedText]}>{match}</Text>
+      );
+    }
+    return <Text style={[{ color: '#c5c5c5', fontSize: 16 }, style?.suggestedText]}>{formatted}</Text>
   }
 
-  if(format == 'unmatched') {
-    return <Text style={[{ color: '#c5c5c5', fontSize: 16 }, style.main]}>
-    <Text style={[{fontWeight: 'bold', color: '#121'}, style.sub]}>{t[0]}</Text>
-    {subText}
-    <Text style={[{fontWeight: 'bold', color: '#121'}, style.sub]}>{t[1]}</Text>
-  </Text>
+  if (format == 'unmatched') {
+    for (let index = 0; index < matched.length; index++) {
+      let { offset, length } = matched[index];
+      const match = text.slice(offset, offset + length).join('');
+      if(text.length != formatted.length) {
+        // adjust offset to match the new array length
+        offset = offset - (text.length - formatted.length);
+      }
+      formatted.splice(
+        offset, 
+        length, 
+        <Text key={nanoid()} style={[{fontWeight: 'normal', color: '#c5c5c5'}, style?.suggestedText]}>{match}</Text>
+      );
+    }
+    return <Text style={[{ color: '#121', fontSize: 16, fontWeight: "bold" }, style?.highlightedText]}>{formatted}</Text>
   }
-
-  return <Text style={[{ color: '#c5c5c5', fontSize: 16 }, style.main]}>{text}</Text>
+  
+  return <Text style={[{ color: '#c5c5c5', fontSize: 16 }, style?.suggestedText]}>{text.join('')}</Text>
 }
 
 // styling for the suggestions FlatList
 export interface suggestionsStyle {
   container?: ViewStyle,
   itemContainer?: ViewStyle,
-  mainText?: TextStyle,
-  boldText?: TextStyle,
+  suggestedText?: TextStyle,
+  highlightedText?: TextStyle,
 };
 
 export interface PlacesProps {
@@ -62,8 +83,6 @@ export default function Places({ data, setValue, suggestionsStyle, icon, highlig
         keyboardShouldPersistTaps='always'
         data={data}
         renderItem={({ item }) => {
-          const i = item.matched_substrings[0];
-          const s = item.description.slice(i.offset, i.offset+i.length);
           return (
             <TouchableWrapper key={item.id} onPress={() => {
               setValue(item);
@@ -78,9 +97,9 @@ export default function Places({ data, setValue, suggestionsStyle, icon, highlig
                 }
                 <View style={{ flex: 1 }}>
                   {decorateText(
-                    item.description,
-                    s,
-                    {main: suggestionsStyle?.mainText, sub: suggestionsStyle?.boldText},
+                    item.description.split(''),
+                    item.matched_substrings,
+                    suggestionsStyle,
                     highlight
                   )}
                </View>

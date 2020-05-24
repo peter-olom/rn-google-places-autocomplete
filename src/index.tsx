@@ -9,7 +9,7 @@ import Places, { suggestionsStyle, decorateTextFormat } from './places';
 import { GoogleAutocompleteResult, prediction, GoogleParameters } from './types';
 
 export interface PlacesAutocompleteProps {
-  sessionSupport?: 'bare' | 'expo';
+  sessionTokenSupport?: 'native' | 'expo';
   placeholder?: string;
   value?: string;
   autocompleteContainer?: ViewStyle;
@@ -29,7 +29,7 @@ export interface PlacesAutocompleteProps {
 }
 
 function PlacesAutocomplete({
-  sessionSupport,
+  sessionTokenSupport,
   placeholder,
   value,
   autocompleteContainer,
@@ -72,11 +72,11 @@ function PlacesAutocomplete({
   }
 
   const createSessionToken = async () => {
-    if (sessionSupport == 'expo') {
+    if (sessionTokenSupport == 'expo') {
       return await expoNanoid();
     }
     
-    if (sessionSupport == 'bare') {
+    if (sessionTokenSupport == 'native') {
       return bareNanoid();
     }
   }
@@ -95,8 +95,6 @@ function PlacesAutocomplete({
             // create session token here
             const sess = await createSessionToken();
             if(sess) setSessionToken(sess);
-
-            console.log(sess)
           }}
           onBlur={() => {
             // discard the session token

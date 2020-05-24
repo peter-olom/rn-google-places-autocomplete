@@ -11,7 +11,7 @@ Easy to use Google Places Autocomplete with in-built support for sessionTokens.
 
 ### Installation
 
-**Note**: You must obtain an API Key for Places Autocomplete from your developer console. This Module uses the HTTP Places Autocomplete web service 
+**Note**: You must obtain an API Key for Places Autocomplete from your google developer console. This Module uses the HTTP Places Autocomplete web service 
 
 ```bash
 npm install rn-google-places-autocomplete
@@ -36,11 +36,14 @@ const apiKey = 'YOUR_API_KEY';
     apiKey: apiKey,
     components: ['ng']
   }}
-  platformType="expo"
+  autocompleteContainer={{
+    width: '96%',
+  }}
+  sessionTokenSupport="expo"
   placeholder="Search place"
   fetchActivity={true}
   predictionOptions={{
-    icon: <Icon /> //,
+    icon: <Icon /> // any arbitrary react element,
     highlight: 'matched',
     style: {
       mainText: {
@@ -69,16 +72,16 @@ const apiKey = 'YOUR_API_KEY';
 ### Features
 
 * Supports Session Tokens
-* Offers useful events that allow more customizations
-* Easy to style
-* Mirrors all parameter on the [google documentation here](https://developers.google.com/places/web-service/autocomplete/ "Google Places Autocomplete")
+* Offers useful events that allows for more customizations
+* Easy to style and customize
+* Mirrors all parameter on the [google documentation here](https://developers.google.com/places/web-service/autocomplete/ "Google Places Autocomplete"), with typings
 
 
 ### Complete PlacesAutocomplete Options
 
 ```typescript
 
-  platformType: "bare" | "expo" // choose expo for expo project and bare otherwise
+  sessionTokenSupport: "native" | "expo" // choose expo for expo project and native otherwise
 
   placeholder: string // input place holder
 
@@ -97,7 +100,7 @@ const apiKey = 'YOUR_API_KEY';
   predictionOptions: {
     style?: suggestionsStyle, // style every component in the predictions list see styling for more information
     icon?: JSX.Element, // icon to display on the left in each prediction item
-    highlight?: decorateTextFormat // matched | unmatched; specifies part of text to highlight
+    highlight?: decorateTextFormat // matched | unmatched; specifies part of prediction result to highlight
   }
 
   googleParameters: GoogleParameters // all supported parameters from places autocomplete. see https://developers.google.com/places/web-service/autocomplete
@@ -141,7 +144,7 @@ const apiKey = 'YOUR_API_KEY';
   }
 
 ```
-### Important component types
+### Important types
 
 ```typescript
   // see https://developers.google.com/places/web-service/autocomplete for more 
