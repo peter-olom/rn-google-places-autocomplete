@@ -46,10 +46,10 @@ const apiKey = 'YOUR_API_KEY';
     icon: <Icon /> // any arbitrary react element,
     highlight: 'matched',
     style: {
-      mainText: {
+      suggestedText: {
         color: '#5c6bc0'
       },
-      boldText: {
+      highlightedText: {
         color: '#303f9f'
       }
     }
@@ -133,9 +133,9 @@ const apiKey = 'YOUR_API_KEY';
 
         itemContainer: ViewStyle // prediction lineItem style
 
-        mainText: TextStyle // prediction text style
+        suggestedText: TextStyle // prediction text style
 
-        boldText: TextStyle // styling for when highlight is set
+        highlightedText: TextStyle // styling for when highlight is set
 
       }
 
