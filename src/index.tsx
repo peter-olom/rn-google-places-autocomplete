@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, TextInput, StyleSheet, ViewStyle, TextStyle, ActivityIndicator } from 'react-native';
+import { View, TextInput, StyleSheet, ViewStyle, TextStyle, ActivityIndicator, Text } from 'react-native';
 import 'react-native-get-random-values';
 import * as Random from 'expo-random';
 import { nanoid as bareNanoid } from 'nanoid'
@@ -7,6 +7,7 @@ import { nanoid as expoNanoid } from 'nanoid/async/index'
 import queryAddr from './query';
 import Places, { suggestionsStyle, decorateTextFormat } from './places';
 import { GoogleAutocompleteResult, prediction, GoogleParameters } from './types';
+import TouchableWrapper from './TouchableWrapper';
 
 export interface PlacesAutocompleteProps {
   sessionTokenSupport?: 'native' | 'expo';
@@ -48,6 +49,7 @@ function PlacesAutocomplete({
   const [places, setPlaces] = React.useState<Array<prediction>>([]);
   const [sessionToken, setSessionToken] = React.useState<string>();
   const [fetching, setFetching] = React.useState<boolean>(false);
+  const [blurred, setBlurred] = React.useState<boolean>(true);
 
   const offset = fetchOffset || 3;
   
@@ -92,11 +94,13 @@ function PlacesAutocomplete({
           placeholder={placeholder}
           value={addr}
           onFocus={async () => {
+            setBlurred(false);
             // create session token here
             const sess = await createSessionToken();
             if(sess) setSessionToken(sess);
           }}
           onBlur={() => {
+            setBlurred(true);
             // discard the session token
             setSessionToken('');
             setPlaces([]);
@@ -123,7 +127,7 @@ function PlacesAutocomplete({
                 );
                 setPlaces(res.predictions);
               } catch (_err) {
-                // this will only every happen when fetching fails
+                // this will only ever happen when fetching fails
                 console.warn(_err);
               }
             }
@@ -136,6 +140,14 @@ function PlacesAutocomplete({
               <ActivityIndicator size={20} animating={true} />
             </View>
             : fetchActivity
+          :<></>
+        }
+        {!fetching && !blurred ? 
+          <View style={styles.loaderStyle}>
+            <TouchableWrapper style={{ height: 32, width: 32, borderRadius: 16 }} onPress={() => { setAddr('') }}>
+              <Text style={{ fontSize: 24, color: 'grey', textAlign: 'center' }}>&times;</Text>
+            </TouchableWrapper>
+          </View>
           :<></>
         }
       </View>    
@@ -169,7 +181,9 @@ const styles = StyleSheet.create({
   },
   loaderStyle: {
     position: 'absolute',
-    right: 10,
-    top: 16
+		height: '100%',
+		right: 5,
+		justifyContent: 'center',
+		backgroundColor: '#00000000',
   }
 });
