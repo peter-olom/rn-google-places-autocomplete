@@ -137,7 +137,7 @@ function PlacesAutocomplete({
         {fetchActivity && fetching ? 
           typeof(fetchActivity) == 'boolean' ?
             <View style={styles.loaderStyle}>
-              <ActivityIndicator size={20} animating={true} />
+              <ActivityIndicator size={20} animating={true} style={{ width: 32 }} />
             </View>
             : fetchActivity
           :<></>
