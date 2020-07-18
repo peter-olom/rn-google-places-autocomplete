@@ -112,7 +112,7 @@ export default function Places({ data, setValue, suggestionsStyle, icon, highlig
             <Image source={require('../assets/powered_by_google.png')} resizeMode='contain' style={{ width: '32%', alignSelf: 'flex-end', marginRight: 10 }} />
             :<></>
         }
-        keyExtractor={item => item.id}
+        keyExtractor={(item, index) => `${item.id}${index}`}
       />
     </View>
   );
