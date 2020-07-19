@@ -65,6 +65,9 @@ const apiKey = 'YOUR_API_KEY';
     // true when fetch starts and false when fetch end
     // you can create a custom interaction by listing to this event
   }}
+  onClearText={() => {
+    // perform actions here when the address gets cleared using the "x" button
+  }}
 />
 
 ```

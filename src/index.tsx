@@ -26,6 +26,7 @@ export interface PlacesAutocompleteProps {
   googleParameters: GoogleParameters
   onSelectAddress?(address: prediction): void;
   onFetching?(status: boolean): void;
+  onClearText?(): void;
   onQueryError?(res: GoogleAutocompleteResult): void;
 }
 
@@ -42,6 +43,7 @@ function PlacesAutocomplete({
   googleParameters,
   onSelectAddress,
   onFetching,
+  onClearText,
   onQueryError,
 }: PlacesAutocompleteProps) 
 {
@@ -144,7 +146,10 @@ function PlacesAutocomplete({
         }
         {!fetching && !blurred ? 
           <View style={styles.loaderStyle}>
-            <TouchableWrapper style={{ height: 32, width: 32, borderRadius: 16 }} onPress={() => { setAddr('') }}>
+            <TouchableWrapper style={{ height: 32, width: 32, borderRadius: 16 }} onPress={() => { 
+                setAddr('');
+                if (onClearText) onClearText();
+              }}>
               <Text style={{ fontSize: 24, color: 'grey', textAlign: 'center' }}>&times;</Text>
             </TouchableWrapper>
           </View>
