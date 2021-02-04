@@ -1,11 +1,38 @@
 {
-  "name": "rn-google-places-autocomplete",
-  "version": "1.1.8",
-  "description": "Easy to use Google places autocomplete with in-built support for sessionTokens",
-  "main": "dist/index.jsx",
-  "types": "dist/index.d.ts",
+  "version": "2.0.1",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
-    "prepare": "tsc"
+    "start": "tsdx watch",
+    "build": "tsdx build && cp src/*.png dist",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-native": ">= 0.60"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "keywords": [
     "react-native",
@@ -16,25 +43,33 @@
     "token",
     "easy"
   ],
+  "name": "rn-google-places-autocomplete",
   "author": "Peter Olom",
   "homepage": "https://github.com/peter-olom/rn-google-places-autocomplete",
   "repository": "https://github.com/peter-olom/rn-google-places-autocomplete",
-  "license": "MIT",
+  "module": "dist/rn-google-places-autocomplete.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/rn-google-places-autocomplete.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/rn-google-places-autocomplete.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "devDependencies": {
-    "@types/react": "^16.9.36",
-    "@types/react-native": "^0.62.13",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-native": "^0.62.2"
+    "@size-limit/preset-small-lib": "^4.9.2",
+    "@types/react": "^17.0.1",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-native": "^0.63.47",
+    "husky": "^4.3.8",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "size-limit": "^4.9.2",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.1.0",
+    "typescript": "^4.1.3"
   },
-  "dependencies": {
-    "expo-random": "^8.1.0",
-    "nanoid": "^3.1.9",
-    "react-native-get-random-values": "^1.4.0"
-  },
-  "peerDependencies": {
-    "react-native": ">= 0.60",
-    "react": ">= 16.9.0",
-    "react-dom": ">= 16.9.0"
-  }
+  "dependencies": {}
 }

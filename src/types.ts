@@ -54,3 +54,7 @@ export interface GoogleParameters {
   components?: Array<iso3166>;
   strictbounds?: boolean;
 }
+
+export interface TokenGenerator {
+  (): string | Promise<string>;
+}

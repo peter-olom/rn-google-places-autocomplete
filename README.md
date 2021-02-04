@@ -1,7 +1,7 @@
 
 # rn-google-places-autocomplete
 
-Easy to use Google Places Autocomplete with in-built support for sessionTokens.
+Easy to use Google Places Autocomplete with in-built support for sessionToken generator.
 
 ### Screenshot
 ![](./screenshot/1.gif)
@@ -11,7 +11,7 @@ Easy to use Google Places Autocomplete with in-built support for sessionTokens.
 
 ### Installation
 
-**Note**: You must obtain an API Key for Places Autocomplete from your google developer console. This Module uses the HTTP Places Autocomplete web service 
+**Note**: You must obtain an API Key for Places Autocomplete from your google developer console. This Module uses the HTTP Places Autocomplete web service .
 
 ```bash
 npm install rn-google-places-autocomplete
@@ -28,6 +28,11 @@ yarn add rn-google-places-autocomplete
 import PlacesAutocomplete from 'rn-google-places-autocomplete';
 const apiKey = 'YOUR_API_KEY';
 
+// I recommend using `nanoid` for generating session tokens
+const tokenGen () => {
+  return Math.random().toString(36).substr(1);
+}
+
 // built from the ground up to be easily customized
 // includes typings for all options
 
@@ -39,7 +44,7 @@ const apiKey = 'YOUR_API_KEY';
   autocompleteContainer={{
     width: '96%',
   }}
-  sessionTokenSupport="expo"
+  tokenGenerator={tokenGen} // accepts token generator that return string | Promise<string>
   placeholder="Search place"
   fetchActivity={true}
   predictionOptions={{
@@ -84,7 +89,7 @@ const apiKey = 'YOUR_API_KEY';
 
 ```typescript
 
-  sessionTokenSupport: "native" | "expo" // choose expo for expo project and native otherwise
+  tokenGenerator: () => string | Promise<string> // inject a function that generates random string. Checkout nanoid
 
   placeholder: string // input place holder
 
